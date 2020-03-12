@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -20,12 +20,37 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(8px + 2vmin);
   color: white;
+  word-wrap: break-word;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.formulario {
+  background-color: #cecece;
+  color: #222;
+  border-radius: 10px;
+  margin: auto;
+  padding: 15px;
+  width: 550px;
+  min-height: 400px;
+  box-shadow: 0 4px 8px 0 rgba(212, 212, 212, 0.2), 0 6px 20px 0 rgba(163, 163, 163, 0.19);
+}
+
+.input_field {
+  width: 60%;
+  padding: 10px 10px 10px 40px;
+  margin: 8px;
+  font-size: calc(8px + 2vmin);
+  box-sizing: border-box;
+  color: #cecece;
+  background-repeat: no-repeat;
+  background-image: url('./logo.svg');
+  background-size: 42px 42px;
+  background-color: #282c34;
 }
 
 @keyframes App-logo-spin {
