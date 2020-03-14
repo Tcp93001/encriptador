@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  position: absolute;
+  transition: opacity 1s ease-in;
 }
 
 .App-logo {
@@ -9,13 +11,32 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 7s linear;
   }
+}
+
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+  color: #ccc;
+}
+
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +51,8 @@
 }
 
 .formulario {
-  background-color: #cecece;
+  background-color: transparent;
+  background-image: url('./sword.PNG');
   color: #222;
   border-radius: 10px;
   margin: auto;
@@ -38,6 +60,23 @@
   width: 550px;
   min-height: 400px;
   box-shadow: 0 4px 8px 0 rgba(212, 212, 212, 0.2), 0 6px 20px 0 rgba(163, 163, 163, 0.19);
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+button {
+  background-color: rgb(246, 114, 114);
+  font-size: medium;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(212, 212, 212, 0.2), 0 6px 20px 0 rgba(255, 175, 175);
+  outline: none;
+}
+
+button:hover {
+  background-color: rgb(241, 78, 78);
+  outline: none;
 }
 
 .input_field {
@@ -46,18 +85,22 @@
   margin: 8px;
   font-size: calc(8px + 2vmin);
   box-sizing: border-box;
-  color: #cecece;
+  color: #383838;
   background-repeat: no-repeat;
-  background-image: url('./logo.svg');
-  background-size: 42px 42px;
-  background-color: #282c34;
+  background-image: url('./thundercats-logo-bn.png');
+  background-position: left;
+  background-size: 35px;
+  background-color: #b1a7a0d8;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 0deg);
   }
 }

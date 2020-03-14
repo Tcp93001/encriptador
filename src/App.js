@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import logoColor from './thundercats-logo-red.png'
 import './App.css';
 
 function App() {
@@ -9,8 +9,16 @@ function App() {
   const [numTarjeta, setTarjeta] = useState('')
   const [datoEncrypt, setEncrypt] = useState('')
   const [datoDesEnc, setDesenc] = useState(null)
+  const [opacidad, setOpacidad] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpacidad(false)
+    }, 19000);
+  })
 
   const enviarServicioEncriptacion = async () => {
+    if (numTarjeta === '') return
     const dataParaEncriptar = {
       data: numTarjeta,
       key: 'mx.com.findep.secureData.key'
@@ -53,6 +61,7 @@ function App() {
   };
 
   const desencriptarValor = async () => {
+    if (datoEncrypt === '') return
     setDesenc('')
     const dataParaDesEncrypt = {
       data: datoEncrypt,
@@ -74,37 +83,50 @@ function App() {
   }
 
   const limpiarCampos = () => {
+    setTarjeta('')
     setDesenc('')
     setEncrypt('')
     setDesenc('')
   }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div className="formulario">
-          <p>
-            Capture el número de tarjeta en la casilla y observe el resultado de encriptación y desencriptación...
-          </p>
-          <br/>
-          <label>Número Tarjeta   </label>
-          <input value={numTarjeta} className="input_field" onChange={event => setTarjeta(event.target.value)} />
-          <button onClick={() => {enviarServicioEncriptacion()}}>Encriptar</button>
-          <br/>
-          <p>
-          	Valor Encriptado: {datoEncrypt}
-          </p>
+  const modal = opacidad ? '0' : '1'
+  const video = opacidad ? '1' : '0'
 
-          <label>Desencriptar   </label>
-          <input value={datoEncrypt} className="input_field" onChange={event => setEncrypt(event.target.value)} />
-          <button onClick={() => {desencriptarValor()}}>Desencriptar</button>
-          <p>
-          	Valor desencriptado: {datoDesEnc}
-          </p>
-          <button onClick={() => {limpiarCampos()}}>Limpiar campos</button>
+  return (
+    <div style={{backgroundColor: 'black'}}>
+      <div className="video-background" style={{opacity: video}}>
+        <div style={{ position: 'absolute', zIndex: '40'}} onClick={() => {setOpacidad(false)}}> Saltar Intro</div>
+        <div className="video-foreground">
+          <iframe width="560" height="315" title="Thundercats" src="https://www.youtube.com/embed/HcGNqrAtsgg?autoplay=1&start=0&end=19&loop=1" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </div>
-        Made with love with <img src={logo} className="App-logo" alt="logo" />
-      </header>
+      </div>
+      <div className="App" style={{opacity: modal}}>
+        <header className="App-header">
+          <div className="container_form">
+            <div className="formulario">
+              <p>
+                Encriptación
+              </p>
+              <br/>
+              <label>Número Tarjeta   </label>
+              <input value={numTarjeta} className="input_field" onChange={event => setTarjeta(event.target.value)} />
+              <button onClick={() => {enviarServicioEncriptacion()}}>Encriptar</button>
+              <br/>
+              <p>
+                Valor Encriptado: {datoEncrypt}
+              </p>
+              <label>Desencriptar   </label>
+              <input value={datoEncrypt} className="input_field" onChange={event => setEncrypt(event.target.value)} />
+              <button onClick={() => {desencriptarValor()}}>Desencriptar</button>
+              <p>
+                Valor desencriptado: {datoDesEnc}
+              </p>
+              <button onClick={() => {limpiarCampos()}}>Limpiar campos</button>
+            </div>
+          </div>
+          Made with love by <img src={logoColor} className="App-logo" alt="logo" />
+        </header>
+      </div>
     </div>
   );
 }
