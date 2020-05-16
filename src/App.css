@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   position: absolute;
-  transition: opacity 1s ease-in;
 }
 
 .App-logo {
@@ -10,6 +9,7 @@
 }
 
 .App-header {
+  background-color: transparent;
   min-height: 100vh;
   width: 100vw;
   display: flex;
@@ -28,6 +28,7 @@
 .container_form {
   box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.21);
   border-radius: 10px;
+  background-color: #fff;
 }
 
 .formulario {

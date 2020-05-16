@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+function Encriptador() {
   const encriptarURL = 'http://10.6.1.110:7011/secureDataWeb/rest/secureData/encrypt'
   const desEncriptarURL = 'http://10.6.1.110:7011/secureDataWeb/rest/secureData/decrypt'
 
@@ -121,4 +121,4 @@ function App() {
   );
 }
 
-export default App;
+export default Encriptador;
