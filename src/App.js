@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import logoColor from './thundercats-logo-red.png'
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -9,13 +8,8 @@ function App() {
   const [numTarjeta, setTarjeta] = useState('')
   const [datoEncrypt, setEncrypt] = useState('')
   const [datoDesEnc, setDesenc] = useState(null)
-  const [opacidad, setOpacidad] = useState(true)
 
-  useEffect(() => {
-    setTimeout(() => {
-      setOpacidad(false)
-    }, 19000);
-  })
+
 
   const enviarServicioEncriptacion = async () => {
     if (numTarjeta === '') return
@@ -23,21 +17,27 @@ function App() {
       data: numTarjeta,
       key: 'mx.com.findep.secureData.key'
     }
-    const datosEncriptados = await fetch(`${encriptarURL}`, {
+    try {
+      const datosEncriptados = await fetch(`${encriptarURL}`, {
       method: "POST",
       body: JSON.stringify(dataParaEncriptar),
       headers: {
         "Content-Type": "application/json"
       },
-    }).then(res => res.json())
-    .then(response => {
-      console.log('response', response)
-      return response;
-    })
-    .catch(error => console.error('Error:', error))
+      }).then(res => res.json())
+      .then(response => {
+        console.log('response', response)
+        return response;
+      })
 
-    console.log('datosEncriptados', datosEncriptados)
-    setEncrypt(datosEncriptados.payload.data)
+      console.log('datosEncriptados', datosEncriptados)
+      setEncrypt(datosEncriptados.payload.data)
+    }
+    catch(error) {
+      console.error('Error:', error)
+    }
+
+
 
     // //Lamar al servicio de desencriptación
     // const dataParaDesEncrypt = {
@@ -89,18 +89,9 @@ function App() {
     setDesenc('')
   }
 
-  const modal = opacidad ? '0' : '1'
-  const video = opacidad ? '1' : '0'
-
   return (
-    <div style={{backgroundColor: 'black'}}>
-      <div className="video-background" style={{opacity: video}}>
-        <div style={{ position: 'absolute', zIndex: '40'}} onClick={() => {setOpacidad(false)}}> Saltar Intro</div>
-        <div className="video-foreground">
-          <iframe width="560" height="315" title="Thundercats" src="https://www.youtube.com/embed/HcGNqrAtsgg?autoplay=1&start=0&end=19&loop=1" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-        </div>
-      </div>
-      <div className="App" style={{opacity: modal}}>
+    <div>
+      <div className="App">
         <header className="App-header">
           <div className="container_form">
             <div className="formulario">
@@ -124,7 +115,6 @@ function App() {
               <button onClick={() => {limpiarCampos()}}>Limpiar campos</button>
             </div>
           </div>
-          Made with love by <img src={logoColor} className="App-logo" alt="logo" />
         </header>
       </div>
     </div>
